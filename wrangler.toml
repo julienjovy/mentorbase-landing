@@ -1,3 +1,9 @@
 name = "mentorbase-landing"
 compatibility_date = "2024-11-01"
-pages_build_output_dir = ".output/public"
+
+[assets]
+directory = ".output/public"
+
+[[routes]]
+pattern = "demo.mentorbase.fr"
+custom_domain = true

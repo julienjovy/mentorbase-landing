@@ -19,7 +19,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || "https://mentorbase.fr",
+      siteUrl:
+        process.env.NUXT_PUBLIC_SITE_URL ||
+        process.env.CF_PAGES_URL ||
+        "https://demo.mentorbase.fr",
       contactEmail: process.env.NUXT_PUBLIC_CONTACT_EMAIL || "contact@mentorbase.fr",
     },
   },
