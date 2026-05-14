@@ -1,5 +1,22 @@
+<script setup lang="ts">
+const isScrolled = ref(false);
+
+function onScroll() {
+  isScrolled.value = window.scrollY > 12;
+}
+
+onMounted(() => {
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", onScroll);
+});
+</script>
+
 <template>
-  <header class="landing-header">
+  <header class="landing-header" :class="{ 'landing-header--scrolled': isScrolled }">
     <div class="landing-header__inner container">
       <a class="landing-brand" href="#top">
         <span class="landing-brand__mark">MB</span>

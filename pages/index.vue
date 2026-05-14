@@ -188,6 +188,13 @@ const pilotMetrics = [
   "Temps formateur économisé",
 ];
 
+const exampleSteps = [
+  "Le formateur importe l'énoncé du TP, la FAQ et les critères d'évaluation.",
+  "L'apprenant demande : « Donne-moi le code complet de la validation. »",
+  "MentorBase refuse de livrer la correction complète et propose un indice guidé à partir de l'énoncé.",
+  "Le formateur voit que plusieurs apprenants bloquent sur la même étape et peut ajuster son support.",
+];
+
 function submitContact() {
   const subject = encodeURIComponent("Demande pilote MentorBase");
   const body = encodeURIComponent(
@@ -209,67 +216,51 @@ function submitContact() {
   window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
   contactSubmitted.value = true;
 }
+
+useScrollReveal();
 </script>
 
 <template>
   <div id="top" class="landing-page">
+    <div class="landing-page__ambient" aria-hidden="true">
+      <span class="landing-page__orb landing-page__orb--one" />
+      <span class="landing-page__orb landing-page__orb--two" />
+    </div>
+
     <LandingHeader />
 
     <main>
       <section class="landing-hero container">
-        <div class="landing-hero__copy">
-          <p class="eyebrow">IA pédagogique contrôlée</p>
+        <div class="landing-hero__copy hero-enter">
+          <p class="eyebrow hero-enter__item" style="--i: 0">IA pédagogique contrôlée</p>
           <h1 class="landing-hero__title">
-            <span class="landing-hero__title-seo">Assistant IA pédagogique pour organismes de formation</span>
-            <span class="landing-hero__title-hook">
+            <span class="landing-hero__title-seo hero-enter__item" style="--i: 1">Assistant IA pédagogique pour organismes de formation</span>
+            <span class="landing-hero__title-hook hero-enter__item" style="--i: 2">
               Vos apprenants utilisent déjà ChatGPT. Reprenez le contrôle pédagogique sur ce qu'ils
               apprennent vraiment.
             </span>
           </h1>
-          <p class="landing-hero__lead">
+          <p class="landing-hero__lead hero-enter__item" style="--i: 3">
             MentorBase transforme vos supports de cours, TP, FAQ et critères d'évaluation en assistant
             IA privé.
           </p>
-          <p class="landing-hero__lead landing-hero__lead--secondary">
+          <p class="landing-hero__lead landing-hero__lead--secondary hero-enter__item" style="--i: 4">
             Vos apprenants peuvent demander un indice, une explication ou une reformulation — mais
             l'assistant reste cadré par vos règles pédagogiques et vos documents.
           </p>
-          <div class="landing-hero__actions">
+          <div class="landing-hero__actions hero-enter__item" style="--i: 5">
             <a class="btn btn-lg" href="#contact">Tester sur une formation pilote</a>
             <a class="btn btn-secondary btn-lg" href="#difference-chatgpt">Voir la différence avec ChatGPT</a>
           </div>
         </div>
 
-        <aside class="landing-hero__preview" aria-label="Aperçu de l'assistant">
-          <div class="chat-preview">
-            <div class="chat-preview__header">
-              <span class="chat-preview__dot" />
-              <span>Mode indice · TP Laravel API</span>
-            </div>
-            <div class="chat-preview__message chat-preview__message--user">
-              Donne-moi directement le code du contrôleur pour valider l'emprunt.
-            </div>
-            <div class="chat-preview__message chat-preview__message--assistant">
-              <p>
-                Je ne vais pas te donner le code complet, car cette formation est configurée en mode
-                indice.
-              </p>
-              <p>Commence par identifier :</p>
-              <ol class="chat-preview__list">
-                <li>quelles données doivent être validées ;</li>
-                <li>quelle règle métier empêche un emprunt ;</li>
-                <li>où cette règle est décrite dans l'énoncé.</li>
-              </ol>
-              <p class="chat-preview__sources">
-                Repère utile : TP Laravel API — section « Validation d'un emprunt »
-              </p>
-            </div>
-          </div>
+        <aside class="landing-hero__preview hero-enter__item" style="--i: 3" aria-label="Aperçu de l'assistant">
+          <ChatPreview />
         </aside>
       </section>
 
       <section id="probleme" class="landing-section container">
-        <div class="landing-section__intro">
+        <div class="landing-section__intro" data-reveal>
           <p class="eyebrow">Le problème</p>
           <h2>Encadrer l'usage de ChatGPT en formation</h2>
           <p class="landing-section__lead">
@@ -279,7 +270,7 @@ function submitContact() {
           </p>
         </div>
         <div class="landing-grid landing-grid--3">
-          <article v-for="card in problemCards" :key="card.title" class="landing-card">
+          <article v-for="(card, index) in problemCards" :key="card.title" class="landing-card" data-reveal :style="{ '--reveal-delay': `${index * 80}ms` }">
             <h3>{{ card.title }}</h3>
             <p>{{ card.description }}</p>
           </article>
@@ -288,7 +279,7 @@ function submitContact() {
 
       <section id="solution" class="landing-section landing-section--muted">
         <div class="container">
-          <div class="landing-section__intro">
+          <div class="landing-section__intro" data-reveal>
             <p class="eyebrow">La solution</p>
             <h2>Un assistant IA basé sur vos supports de cours, TP et FAQ</h2>
             <p class="landing-section__lead">
@@ -300,9 +291,11 @@ function submitContact() {
 
           <div class="landing-grid landing-grid--2">
             <article
-              v-for="card in solutionCards"
+              v-for="(card, index) in solutionCards"
               :key="card.title"
               class="landing-card landing-card--feature"
+              data-reveal
+              :style="{ '--reveal-delay': `${index * 80}ms` }"
             >
               <h3>{{ card.title }}</h3>
               <p>{{ card.description }}</p>
@@ -312,55 +305,45 @@ function submitContact() {
       </section>
 
       <section class="landing-section container">
-        <div class="landing-section__intro">
+        <div class="landing-section__intro" data-reveal>
           <p class="eyebrow">Exemple concret</p>
           <h2>Une aide aux apprenants sans correction toute faite</h2>
         </div>
         <div class="example-flow">
-          <div class="example-step">
-            <span class="example-step__index">1</span>
-            <p>Le formateur importe l'énoncé du TP, la FAQ et les critères d'évaluation.</p>
-          </div>
-          <div class="example-step">
-            <span class="example-step__index">2</span>
-            <p>L'apprenant demande : « Donne-moi le code complet de la validation. »</p>
-          </div>
-          <div class="example-step">
-            <span class="example-step__index">3</span>
-            <p>
-              MentorBase refuse de livrer la correction complète et propose un indice guidé à partir
-              de l'énoncé.
-            </p>
-          </div>
-          <div class="example-step">
-            <span class="example-step__index">4</span>
-            <p>
-              Le formateur voit que plusieurs apprenants bloquent sur la même étape et peut ajuster
-              son support.
-            </p>
+          <div
+            v-for="(text, index) in exampleSteps"
+            :key="text"
+            class="example-step"
+            data-reveal
+            :style="{ '--reveal-delay': `${index * 100}ms` }"
+          >
+            <span class="example-step__index">{{ index + 1 }}</span>
+            <p>{{ text }}</p>
           </div>
         </div>
       </section>
 
       <section id="difference-chatgpt" class="landing-section landing-section--muted">
         <div class="container">
-          <div class="landing-section__intro">
+          <div class="landing-section__intro" data-reveal>
             <p class="eyebrow">Différence avec ChatGPT</p>
             <h2>Pourquoi choisir MentorBase plutôt qu'un ChatGPT libre ?</h2>
             <p class="landing-section__lead">ChatGPT est puissant, mais il n'est pas votre cadre pédagogique.</p>
           </div>
           <div class="comparison-table">
             <article
-              v-for="row in comparison"
+              v-for="(row, index) in comparison"
               :key="row.label"
               class="comparison-row"
               :class="{ 'comparison-row--highlight': row.mentorbase }"
+              data-reveal
+              :style="{ '--reveal-delay': `${index * 120}ms` }"
             >
               <h3>{{ row.label }}</h3>
               <p>{{ row.text }}</p>
             </article>
           </div>
-          <p class="comparison-closing">
+          <p class="comparison-closing" data-reveal>
             MentorBase ne remplace pas ChatGPT.<br />
             Il transforme l'usage de l'IA en outil pédagogique contrôlé.
           </p>
@@ -368,7 +351,7 @@ function submitContact() {
       </section>
 
       <section id="pilote" class="landing-section container">
-        <div class="landing-pilot">
+        <div class="landing-pilot" data-reveal>
           <div>
             <p class="eyebrow">Offre pilote</p>
             <h2>Offre pilote pour écoles, bootcamps et formateurs</h2>
@@ -394,12 +377,18 @@ function submitContact() {
 
       <section id="faq" class="landing-section landing-section--muted">
         <div class="container">
-          <div class="landing-section__intro">
+          <div class="landing-section__intro" data-reveal>
             <p class="eyebrow">FAQ</p>
             <h2>Questions fréquentes sur MentorBase</h2>
           </div>
           <div class="landing-faq">
-            <details v-for="item in faqItems" :key="item.question" class="landing-faq__item">
+            <details
+              v-for="(item, index) in faqItems"
+              :key="item.question"
+              class="landing-faq__item"
+              data-reveal
+              :style="{ '--reveal-delay': `${index * 60}ms` }"
+            >
               <summary class="landing-faq__question">{{ item.question }}</summary>
               <p class="landing-faq__answer">{{ item.answer }}</p>
             </details>
@@ -409,7 +398,7 @@ function submitContact() {
 
       <section id="contact" class="landing-section landing-section--contact">
         <div class="container landing-contact">
-          <div>
+          <div data-reveal>
             <p class="eyebrow">Contact</p>
             <h2>Vous voulez tester sur une formation existante ?</h2>
             <p class="landing-section__lead">
@@ -418,7 +407,7 @@ function submitContact() {
             </p>
           </div>
 
-          <form v-if="!contactSubmitted" class="landing-form" @submit.prevent="submitContact">
+          <form v-if="!contactSubmitted" class="landing-form" data-reveal @submit.prevent="submitContact">
             <div class="landing-form__grid">
               <label class="field">
                 <span class="field__label">Nom</span>
