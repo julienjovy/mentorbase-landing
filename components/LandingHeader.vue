@@ -30,6 +30,7 @@ onUnmounted(() => {
         <a class="landing-nav__link" href="#probleme">Problème</a>
         <a class="landing-nav__link" href="#solution">Solution</a>
         <a class="landing-nav__link" href="#difference-chatgpt">Différence avec ChatGPT</a>
+        <a class="landing-nav__link" href="#comparatif-marche">Marché</a>
         <a class="landing-nav__link" href="#pilote">Offre pilote</a>
         <a class="landing-nav__link" href="#faq">FAQ</a>
         <a class="btn" href="#contact">Demander une démo</a>

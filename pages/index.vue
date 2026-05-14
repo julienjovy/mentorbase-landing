@@ -171,6 +171,50 @@ const comparison = [
   },
 ];
 
+const marketMatrixRows = [
+  {
+    label: "ChatGPT / Copilot en libre",
+    covers:
+      "Réponses générales, code, reformulations — utile mais hors périmètre précis de votre formation.",
+    limit:
+      "Pas vos consignes ni vos interdits ; aucune visibilité sur ce que posent réellement les apprenants.",
+    mentorbase:
+      "Réponses calées sur vos documents, modes d'aide (indice / explication) et signaux pour le formateur.",
+  },
+  {
+    label: "Statu quo (interdire ou fermer les yeux)",
+    covers: "Zéro outil, zéro ligne budgétaire IA dédiée.",
+    limit:
+      "L'usage continue en parallèle, sans cadre ni mesure : le risque pédagogique reste, il est seulement invisible.",
+    mentorbase:
+      "Un canal officiel, cadré et mesurable — alternative claire au tout-interdit / tout toléré.",
+  },
+  {
+    label: "LMS + module IA générique",
+    covers: "Parcours, suivi, parfois coach ou Q/R intégré au catalogue produit.",
+    limit:
+      "Souvent générique ou contenu catalogue : peu ancré sur vos TP, énoncés et FAQ spécifiques.",
+    mentorbase:
+      "Vos fichiers réels (PDF, MD, énoncés) indexés et interrogés dans le cadre que vous définissez.",
+  },
+  {
+    label: "Outils d'auteur IA (création de contenu)",
+    covers: "Accélérer slides, QCM, scripts de cours, reformulations de supports.",
+    limit:
+      "Optimise la production — ne contrôle pas l'apprenant au moment du TP avec ces mêmes consignes.",
+    mentorbase:
+      "Côté apprenant pendant la formation : aide sans correction toute faite, sources visibles quand c'est pertinent.",
+  },
+  {
+    label: "Plateformes larges « agents IA »",
+    covers: "Suite complète : LMS, plusieurs agents, multiples cas d'usage.",
+    limit:
+      "Surface large à prendre en main ; souvent un changement d'habitudes ou d'outil pour l'organisme.",
+    mentorbase:
+      "Couche ciblée : assistant pédagogique privé sur une ou quelques formations pilotes, sans tout remplacer.",
+  },
+];
+
 const pilotIncludes = [
   "Espace privé pour votre organisme",
   "1 formation intégrée",
@@ -347,6 +391,34 @@ useScrollReveal();
             MentorBase ne remplace pas ChatGPT.<br />
             Il transforme l'usage de l'IA en outil pédagogique contrôlé.
           </p>
+
+          <div id="comparatif-marche" class="market-matrix" data-reveal>
+            <h3 class="market-matrix__title">Repères marché : où se situe MentorBase ?</h3>
+            <p class="market-matrix__intro">
+              Les acheteurs comparent souvent mentalement avec ces approches — pas toujours avec un
+              « concurrent » unique.
+            </p>
+            <div class="market-matrix__scroll" role="region" aria-label="Tableau comparatif des approches">
+              <table class="market-matrix__table">
+                <thead>
+                  <tr>
+                    <th scope="col">Approche</th>
+                    <th scope="col">Ce qu'elle couvre souvent</th>
+                    <th scope="col">Limite pour votre cadre</th>
+                    <th scope="col" class="market-matrix__th--mb">Avec MentorBase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="row in marketMatrixRows" :key="row.label">
+                    <th scope="row" class="market-matrix__rowhead">{{ row.label }}</th>
+                    <td>{{ row.covers }}</td>
+                    <td>{{ row.limit }}</td>
+                    <td class="market-matrix__cell--mb">{{ row.mentorbase }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
