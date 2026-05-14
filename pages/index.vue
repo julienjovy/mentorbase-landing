@@ -395,8 +395,8 @@ useScrollReveal();
           <div id="comparatif-marche" class="market-matrix" data-reveal>
             <h3 class="market-matrix__title">Repères marché : où se situe MentorBase ?</h3>
             <p class="market-matrix__intro">
-              Les acheteurs comparent souvent mentalement avec ces approches — pas toujours avec un
-              « concurrent » unique.
+              En pratique, on compare souvent ces options entre elles — rarement à un seul produit sur
+              l'étagère.
             </p>
             <div class="market-matrix__scroll" role="region" aria-label="Tableau comparatif des approches">
               <table class="market-matrix__table">
