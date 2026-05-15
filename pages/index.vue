@@ -116,6 +116,7 @@ const contactLearnerCount = ref("");
 const contactSupportsLocation = ref("");
 const contactIaProblem = ref("");
 const contactMessage = ref("");
+const contactWebsite = ref("");
 const contactSubmitted = ref(false);
 
 const problemCards = [
@@ -240,6 +241,11 @@ const exampleSteps = [
 ];
 
 function submitContact() {
+  if (contactWebsite.value.trim() !== "") {
+    contactSubmitted.value = true;
+    return;
+  }
+
   const subject = encodeURIComponent("Demande pilote MentorBase");
   const body = encodeURIComponent(
     [
@@ -480,6 +486,20 @@ useScrollReveal();
           </div>
 
           <form v-if="!contactSubmitted" class="landing-form" data-reveal @submit.prevent="submitContact">
+            <div class="landing-form__hp" aria-hidden="true">
+              <label class="field">
+                <span class="field__label">Site web</span>
+                <input
+                  v-model="contactWebsite"
+                  class="input"
+                  type="text"
+                  name="website"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </label>
+            </div>
+
             <div class="landing-form__grid">
               <label class="field">
                 <span class="field__label">Nom</span>
