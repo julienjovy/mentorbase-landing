@@ -1,0 +1,21 @@
+{
+  "name": "MentorBase",
+  "short_name": "MentorBase",
+  "description": "IA pédagogique contrôlée pour organismes de formation",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1d4ed8",
+  "background_color": "#eef2f8",
+  "display": "standalone",
+  "lang": "fr"
+}
